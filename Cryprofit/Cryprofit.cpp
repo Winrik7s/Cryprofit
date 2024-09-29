@@ -2,10 +2,43 @@
 //
 
 #include <iostream>
+#include <cstdlib>
+
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    system("chcp 1251 > nul");
+
+    cout << "Введите, кол - во токенов, которые Вы купили: ";
+    double tokens = 0;
+    cin >> tokens;
+
+    cout << endl;
+
+    cout << "Введите, цену покупки за один токен: ";
+    double purchasePrice = 0;
+    cin >> purchasePrice;
+
+    cout << endl;
+
+    cout << "Введите, цену продажи за один токен: ";
+    double sellingPrice = 0;
+    cin >> sellingPrice;
+
+    cout << endl;
+
+    cout << "Введите, цену, которую составила комиссия: ";
+    double commission = 0;
+    cin >> commission;
+
+    cout << endl;
+    cout << endl;
+
+    double profit = (sellingPrice * tokens) - (purchasePrice * tokens) - commission;
+    cout << "Прибыль: " << profit << endl;
+
+    system("pause > nul");
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
