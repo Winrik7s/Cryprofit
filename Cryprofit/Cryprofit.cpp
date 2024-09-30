@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <windows.h>
 
 using namespace std;
 
@@ -27,7 +28,7 @@ int main()
     cout << "Введите, кол - во токенов, которые Вы купили: ";
     double tokens = 0;
     cin >> tokens;
-
+ 
     cout << endl;
 
     cout << "Введите, цену покупки за один токен: ";
@@ -47,10 +48,15 @@ int main()
     cin >> commission;
 
     cout << endl;
+
+    cout << "===========================================================>" << endl;
+
     cout << endl;
 
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+
     double profit = (sellingPrice * tokens) - (purchasePrice * tokens) - commission;
-    cout << "Прибыль: " << profit << endl;
+    cout << "Прибыль: " << SetConsoleTextAttribute(handle, FOREGROUND_GREEN) << profit << " USDT" << endl;
 
     system("pause > nul");
 }
