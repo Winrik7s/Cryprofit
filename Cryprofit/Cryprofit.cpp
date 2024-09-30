@@ -57,16 +57,20 @@ int main()
 
     double profit = (sellingPrice * tokens) - (purchasePrice * tokens) - commission;
 
+    cout << "Прибыль: ";
+
     if(profit <= 0)
     {
-        cout << "Прибыль: " << SetConsoleTextAttribute(handle, FOREGROUND_RED) << "<0 USDT" << endl;
+        SetConsoleTextAttribute(handle, FOREGROUND_RED);
+        cout << "0 USDT" << endl;
     }
     else
     {
-        cout << "Прибыль: " << SetConsoleTextAttribute(handle, FOREGROUND_GREEN) << profit << " USDT" << endl;
+        SetConsoleTextAttribute(handle, FOREGROUND_GREEN);
+        cout << profit << " USDT" << endl;
     }
 
-    SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY);
+    SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
     system("pause > nul");
 }
