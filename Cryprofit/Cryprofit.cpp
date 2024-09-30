@@ -56,7 +56,17 @@ int main()
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
     double profit = (sellingPrice * tokens) - (purchasePrice * tokens) - commission;
-    cout << "Прибыль: " << SetConsoleTextAttribute(handle, FOREGROUND_GREEN) << profit << " USDT" << endl;
+
+    if(profit <= 0)
+    {
+        cout << "Прибыль: " << SetConsoleTextAttribute(handle, FOREGROUND_RED) << "<0 USDT" << endl;
+    }
+    else
+    {
+        cout << "Прибыль: " << SetConsoleTextAttribute(handle, FOREGROUND_GREEN) << profit << " USDT" << endl;
+    }
+
+    SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY);
 
     system("pause > nul");
 }
