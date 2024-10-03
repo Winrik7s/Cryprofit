@@ -56,6 +56,39 @@ int main()
 
     cout << endl;
 
+    char symbol;
+    string crypt;
+
+    cout << "Посмотреть курс криптовалют? Нажмите: y - Да, n - Нет." << endl;
+    cin >> symbol;
+
+    if(symbol == 'y')
+    {
+        cout << "Введите название криптовалюты: ";
+        cin >> crypt;
+
+        string priceData = getPrice(crypt);
+
+        if(!priceData.empty())
+        {
+            cout << "Курс " << crypt << " в USD: " << priceData << endl;
+        }
+        else
+        {
+            cout << "Ошибка при получении данных." << endl;
+        }
+    }
+    else if(symbol == 'n')
+    {
+        cout << "Отлично! Переходим к рассчету" << endl;
+    }
+    else
+    {
+        cout << "Извините, неизвестная команда." << endl;
+    }
+
+    cout << endl;
+
     cout << "Введите, кол - во токенов, которые Вы купили: ";
     double tokens = 0;
     cin >> tokens;

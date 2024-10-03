@@ -119,14 +119,15 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Winrik\Desktop\curl-8.10.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Winrik\Desktop\curl-8.10.1_2-win64-mingw\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Winrik\Desktop\curl-8.10.1\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Winrik\Desktop\curl-8.10.1_2-win64-mingw\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\Users\Winrik\Desktop\curl-8.10.1_2-win64-mingw\lib\libcurl.dll.a</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
