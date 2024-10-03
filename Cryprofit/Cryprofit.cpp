@@ -33,6 +33,8 @@ string getPrice(const string& crypt)
         res = curl_easy_perform(curl);
 
         if (res != CURLE_OK) {
+            HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+            SetConsoleTextAttribute(handle, FOREGROUND_RED);
             cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << endl;
             return "";
         }
@@ -46,6 +48,8 @@ string getPrice(const string& crypt)
 int main()
 {
     system("chcp 1251 > nul");
+
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
     cout << "      ##   ##    ########   ##          ##           ##     \n";
     cout << "     ##   ##    ########   ##          ##        ##     ##  \n";
@@ -64,13 +68,22 @@ int main()
     char symbol;
     string crypt;
 
-    cout << "Посмотреть курс криптовалют? Нажмите: y - Да, n - Нет." << endl;
+    SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+
+    cout << "Посмотреть курс криптовалюты?" << endl;
+    cout << endl;
+
+    cout << "y - Да, n - Нет: ";
     cin >> symbol;
+
+    cout << endl;
 
     if(symbol == 'y')
     {
         cout << "Введите название криптовалюты: ";
         cin >> crypt;
+
+        cout << endl;
 
         string priceData = getPrice(crypt);
 
@@ -80,12 +93,14 @@ int main()
         }
         else
         {
+            cout << endl;
+            SetConsoleTextAttribute(handle, FOREGROUND_RED);
             cout << "Ошибка при получении данных." << endl;
         }
     }
     else if(symbol == 'n')
     {
-        cout << "Отлично! Переходим к рассчету" << endl;
+        cout << "Хорошо, посмотрим расчет." << endl;
     }
     else
     {
@@ -94,25 +109,31 @@ int main()
 
     cout << endl;
 
-    cout << "Введите, кол - во токенов, которые Вы купили: ";
+    SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
+    cout << "===========================================================>" << endl;
+
+    cout << endl;
+
+    cout << "Введите кол - во токенов, которые Вы купили: ";
     double tokens = 0;
     cin >> tokens;
  
     cout << endl;
 
-    cout << "Введите, цену покупки за один токен: ";
+    cout << "Введите цену покупки за один токен: ";
     double purchasePrice = 0;
     cin >> purchasePrice;
 
     cout << endl;
 
-    cout << "Введите, цену продажи за один токен: ";
+    cout << "Введите цену продажи за один токен: ";
     double sellingPrice = 0;
     cin >> sellingPrice;
 
     cout << endl;
 
-    cout << "Введите, цену, которая составила комиссия: ";
+    cout << "Введите цену, которая составила комиссия: ";
     double commission = 0;
     cin >> commission;
 
@@ -121,8 +142,6 @@ int main()
     cout << "===========================================================>" << endl;
 
     cout << endl;
-
-    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
     double profit = (sellingPrice * tokens) - (purchasePrice * tokens) - commission;
 
