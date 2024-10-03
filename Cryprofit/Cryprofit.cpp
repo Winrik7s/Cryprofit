@@ -30,6 +30,8 @@ string getPrice(const string& crypt)
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
 
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+
         res = curl_easy_perform(curl);
 
         if (res != CURLE_OK) {
@@ -51,6 +53,8 @@ int main()
 
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
+    SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+
     cout << "      ##   ##    ########   ##          ##           ##     \n";
     cout << "     ##   ##    ########   ##          ##        ##     ##  \n";
     cout << "    #######    ##         ##          ##        ##       ## \n";
@@ -60,6 +64,8 @@ int main()
     cout << "##   ##    ########   ########    ########        ##        \n";
 
     cout << endl;
+
+    SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
     cout << "===========================================================>" << endl;
 
@@ -89,7 +95,9 @@ int main()
 
         if(!priceData.empty())
         {
-            cout << "Курс " << crypt << " в USD: " << priceData << endl;
+            cout << "Курс " << crypt << " в USD: ";
+            SetConsoleTextAttribute(handle, FOREGROUND_GREEN);
+            cout << priceData << endl;
         }
         else
         {
@@ -115,6 +123,8 @@ int main()
 
     cout << endl;
 
+    SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+
     cout << "Введите кол - во токенов, которые Вы купили: ";
     double tokens = 0;
     cin >> tokens;
@@ -139,12 +149,15 @@ int main()
 
     cout << endl;
 
+    SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
     cout << "===========================================================>" << endl;
 
     cout << endl;
 
     double profit = (sellingPrice * tokens) - (purchasePrice * tokens) - commission;
 
+    SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
     cout << "Прибыль: ";
 
     if(profit <= 0)
