@@ -14,6 +14,30 @@ size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp)
     return size * nmemb;
 }
 
+string getPrice(const string& crypt)
+{
+    CURL* curl;
+    CURLcode res;
+
+    string readBuffer;
+    curl = curl_easy_init();
+
+    if(curl)
+    {
+        string url = "https://api.coingecko.com/api/v3/simple/price?ids=" + crypt + "&vs_currencies=usd";
+
+        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+        res = curl_easy_perform(curl);
+
+        curl_easy_cleanup(curl);
+    }
+
+    return readBuffer;
+}
+
 int main()
 {
     system("chcp 1251 > nul");
