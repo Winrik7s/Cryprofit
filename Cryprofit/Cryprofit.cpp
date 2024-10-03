@@ -32,6 +32,11 @@ string getPrice(const string& crypt)
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
         res = curl_easy_perform(curl);
 
+        if (res != CURLE_OK) {
+            cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << endl;
+            return "";
+        }
+
         curl_easy_cleanup(curl);
     }
 
