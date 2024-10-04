@@ -34,9 +34,11 @@ string getPrice(const string& crypt)
 
         res = curl_easy_perform(curl);
 
-        if (res != CURLE_OK) {
+        if (res != CURLE_OK) 
+        {
             HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
             SetConsoleTextAttribute(handle, FOREGROUND_RED);
+
             cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << endl;
             return "";
         }
@@ -52,7 +54,6 @@ int main()
     system("chcp 1251 > nul");
 
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-
     SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 
     cout << "      ##   ##    ########   ##          ##           ##     \n";
@@ -64,24 +65,21 @@ int main()
     cout << "##   ##    ########   ########    ########        ##        \n";
 
     cout << endl;
-
     SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
     cout << "===========================================================>" << endl;
-
     cout << endl;
 
     char symbol;
     string crypt;
 
     SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-
     cout << "Посмотреть курс криптовалюты?" << endl;
+
     cout << endl;
-
     cout << "y - Да, n - Нет: ";
-    cin >> symbol;
 
+    cin >> symbol;
     cout << endl;
 
     if(symbol == 'y')
@@ -90,18 +88,19 @@ int main()
         cin >> crypt;
 
         cout << endl;
-
         string priceData = getPrice(crypt);
 
         if(!priceData.empty())
         {
             cout << "Курс " << crypt << " в USD: ";
+
             SetConsoleTextAttribute(handle, FOREGROUND_GREEN);
             cout << priceData << endl;
         }
         else
         {
             cout << endl;
+
             SetConsoleTextAttribute(handle, FOREGROUND_RED);
             cout << "Ошибка при получении данных." << endl;
         }
@@ -116,43 +115,39 @@ int main()
     }
 
     cout << endl;
-
     SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
     cout << "===========================================================>" << endl;
-
     cout << endl;
 
     SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-
     cout << "Введите кол - во токенов, которые Вы купили: ";
+
     double tokens = 0;
     cin >> tokens;
  
     cout << endl;
-
     cout << "Введите цену покупки за один токен: ";
+
     double purchasePrice = 0;
     cin >> purchasePrice;
 
     cout << endl;
-
     cout << "Введите цену продажи за один токен: ";
+
     double sellingPrice = 0;
     cin >> sellingPrice;
 
     cout << endl;
-
     cout << "Введите цену, которая составила комиссия: ";
+
     double commission = 0;
     cin >> commission;
 
     cout << endl;
-
     SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
     cout << "===========================================================>" << endl;
-
     cout << endl;
 
     double profit = (sellingPrice * tokens) - (purchasePrice * tokens) - commission;
