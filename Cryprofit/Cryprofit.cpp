@@ -74,17 +74,17 @@ int main()
     string crypt;
 
     SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-    cout << "Посмотреть курс криптовалюты?" << endl;
+    cout << " | Посмотреть курс криптовалюты?" << endl;
 
     cout << endl;
-    cout << "y - Да, n - Нет: ";
+    cout << " | y - Да, n - Нет: ";
 
     cin >> symbol;
     cout << endl;
 
     if(symbol == 'y')
     {
-        cout << "Введите название криптовалюты: ";
+        cout << " | Введите название криптовалюты: ";
         cin >> crypt;
 
         cout << endl;
@@ -92,7 +92,7 @@ int main()
 
         if(!priceData.empty())
         {
-            cout << "Курс " << crypt << " в USD: ";
+            cout << " | Курс " << crypt << " в USD: ";
 
             SetConsoleTextAttribute(handle, FOREGROUND_GREEN);
             cout << priceData << endl;
@@ -102,16 +102,16 @@ int main()
             cout << endl;
 
             SetConsoleTextAttribute(handle, FOREGROUND_RED);
-            cout << "Ошибка при получении данных." << endl;
+            cout << " | Ошибка при получении данных." << endl;
         }
     }
     else if(symbol == 'n')
     {
-        cout << "Хорошо, посмотрим расчет." << endl;
+        cout << " | Хорошо, посмотрим расчет." << endl;
     }
     else
     {
-        cout << "Извините, неизвестная команда." << endl;
+        cout << " | Извините, неизвестная команда." << endl;
     }
 
     cout << endl;
@@ -121,25 +121,25 @@ int main()
     cout << endl;
 
     SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-    cout << "Введите кол - во токенов, которые Вы купили: ";
+    cout << " | Введите кол - во токенов, которые Вы купили: ";
 
     double tokens = 0;
     cin >> tokens;
  
     cout << endl;
-    cout << "Введите цену покупки за один токен: ";
+    cout << " | Введите цену покупки за один токен: ";
 
     double purchasePrice = 0;
     cin >> purchasePrice;
 
     cout << endl;
-    cout << "Введите цену продажи за один токен: ";
+    cout << " | Введите цену продажи за один токен: ";
 
     double sellingPrice = 0;
     cin >> sellingPrice;
 
     cout << endl;
-    cout << "Введите цену, которая составила комиссия: ";
+    cout << " | Введите цену, которая составила комиссия: ";
 
     double commission = 0;
     cin >> commission;
@@ -153,7 +153,7 @@ int main()
     double profit = (sellingPrice * tokens) - (purchasePrice * tokens) - commission;
 
     SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-    cout << "Прибыль: ";
+    cout << " | Прибыль: ";
 
     if(profit <= 0)
     {
