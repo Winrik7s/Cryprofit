@@ -15,6 +15,12 @@ size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp)
 
 string getPrice(const string& crypt)
 {
+    if(crypt.empty())
+    {
+        cout << "Название криптовалюты не может быть пустым." << endl;
+        return "";
+    }
+
     CURL* curl;
     CURLcode res;
 
