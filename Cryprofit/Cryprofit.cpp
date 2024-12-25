@@ -5,6 +5,10 @@
 #include <cstdlib>
 #include <curl/curl.h>
 
+#ifdef max
+#undef max
+#endif
+
 using namespace std;
 
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp)
@@ -17,7 +21,7 @@ string getPrice(const string& crypt)
 {
     if(crypt.empty())
     {
-        cout << "Название криптовалюты не может быть пустым." << endl;
+        cerr << "Название криптовалюты не может быть пустым." << endl;
         return "";
     }
 
@@ -35,7 +39,7 @@ string getPrice(const string& crypt)
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
 
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1L); //Включаем проверку SSL
 
         res = curl_easy_perform(curl);
 
@@ -49,6 +53,32 @@ string getPrice(const string& crypt)
     }
 
     return readBuffer;
+}
+
+double getUserInput(const string& prompt)
+{
+    double value;
+    cout << prompt;
+
+    while(true)
+    {
+        cin >> value;
+        
+        //Обработка ошибок. Проверка на ввод неверных данных
+        if(cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Некорректный ввод. Пожалуйста, попробуйте снова: ";
+        }
+        else
+        {
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            break;
+        }
+    }
+
+    return value;
 }
 
 int main()
