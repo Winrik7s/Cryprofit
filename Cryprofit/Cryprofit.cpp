@@ -5,10 +5,6 @@
 #include <cstdlib>
 #include <curl/curl.h>
 
-#ifdef max
-#undef max
-#endif
-
 using namespace std;
 
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp)
@@ -39,7 +35,7 @@ string getPrice(const string& crypt)
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
 
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1L); //Включаем проверку SSL
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L); //Отключаем проверку SSL
 
         res = curl_easy_perform(curl);
 
@@ -55,32 +51,6 @@ string getPrice(const string& crypt)
     return readBuffer;
 }
 
-double getUserInput(const string& prompt)
-{
-    double value;
-    cout << prompt;
-
-    while(true)
-    {
-        cin >> value;
-        
-        //Обработка ошибок. Проверка на ввод неверных данных
-        if(cin.fail())
-        {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Некорректный ввод. Пожалуйста, попробуйте снова: ";
-        }
-        else
-        {
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            break;
-        }
-    }
-
-    return value;
-}
-
 int main()
 {
     system("chcp 1251 > nul");
@@ -88,7 +58,7 @@ int main()
     string symbol = " ";
     string crypt;
 
-    while(symbol != "n")
+    while (symbol != "n")
     {
         cout << " | Получить курс криптовалюты?" << endl;
         cout << " | y - Да, n - Нет: ";
@@ -128,7 +98,7 @@ int main()
 
     symbol = " ";
 
-    while(symbol != "n")
+    while (symbol != "n")
     {
         cout << " | Получить расчет?" << endl;
         cout << " | y - Да, n - Нет: ";
@@ -136,7 +106,7 @@ int main()
         cin >> symbol;
         cout << endl;
 
-        if (symbol == "y") 
+        if (symbol == "y")
         {
             cout << " | Введите кол - во токенов, которые Вы купили: ";
 
@@ -176,7 +146,7 @@ int main()
                 cout << endl;
             }
         }
-        else if(symbol == "n")
+        else if (symbol == "n")
         {
             return 0;
         }
