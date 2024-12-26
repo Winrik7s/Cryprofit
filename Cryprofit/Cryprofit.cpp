@@ -3,7 +3,9 @@
 
 #include <iostream>
 #include <cstdlib>
+
 #include <curl/curl.h>
+#include <windows.h>
 
 using namespace std;
 
@@ -29,6 +31,7 @@ string getPrice(const string& crypt)
 
     if(curl)
     {
+        HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
         string url = "https://api.coingecko.com/api/v3/simple/price?ids=" + crypt + "&vs_currencies=usd";
 
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
@@ -41,7 +44,9 @@ string getPrice(const string& crypt)
 
         if (res != CURLE_OK) 
         {
-            cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << endl;
+            SetConsoleTextAttribute(handle, FOREGROUND_RED);
+            cerr << endl;
+            cerr << " | curl_easy_perform() failed: " << curl_easy_strerror(res) << endl;
             return "";
         }
 
@@ -53,13 +58,19 @@ string getPrice(const string& crypt)
 
 int main()
 {
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     system("chcp 1251 > nul");
+
+    cout << " /(.)(.)\\ CRYPROF1T /(.)(.)\\" << endl;
+    cout << endl;
 
     string symbol = " ";
     string crypt;
 
     while (symbol != "n")
     {
+        SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
         cout << " | Получить курс криптовалюты?" << endl;
         cout << " | y - Да, n - Нет: ";
 
@@ -75,11 +86,14 @@ int main()
 
             if (!priceData.empty())
             {
-                cout << " | Курс " << crypt << " в USD: " << priceData << endl;
+                cout << " | Курс " << crypt << " в USD: ";
+                SetConsoleTextAttribute(handle, FOREGROUND_GREEN);
+                cout << priceData << endl;
                 cout << endl;
             }
             else
             {
+                SetConsoleTextAttribute(handle, FOREGROUND_RED);
                 cout << " | Ошибка при получении данных." << endl;
                 cout << endl;
             }
@@ -100,6 +114,8 @@ int main()
 
     while (symbol != "n")
     {
+        SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
         cout << " | Получить расчет?" << endl;
         cout << " | y - Да, n - Нет: ";
 
@@ -137,11 +153,13 @@ int main()
 
             if (profit <= 0)
             {
+                SetConsoleTextAttribute(handle, FOREGROUND_RED);
                 cout << "0 USDT" << endl;
                 cout << endl;
             }
             else
             {
+                SetConsoleTextAttribute(handle, FOREGROUND_GREEN);
                 cout << profit << " USDT" << endl;
                 cout << endl;
             }
