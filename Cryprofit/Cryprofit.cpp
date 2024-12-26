@@ -126,25 +126,27 @@ int main()
         {
             cout << " | Введите кол - во токенов, которые Вы купили: ";
 
-            double tokens = 0;
-            cin >> tokens;
+            string line;
+
+            cin >> line;
+            double tokens = atof(line.c_str());
 
             cout << " | Введите цену покупки за один токен: ";
 
-            double purchasePrice = 0;
-            cin >> purchasePrice;
+            cin >> line;
+            double purchasePrice = atof(line.c_str());
 
             cout << endl;
 
             cout << " | Введите цену продажи за один токен: ";
 
-            double sellingPrice = 0;
-            cin >> sellingPrice;
+            cin >> line;
+            double sellingPrice = atof(line.c_str());
 
             cout << " | Введите цену, которая составила комиссия: ";
 
-            double commission = 0;
-            cin >> commission;
+            cin >> line;
+            double commission = atof(line.c_str());
 
             cout << endl;
 
